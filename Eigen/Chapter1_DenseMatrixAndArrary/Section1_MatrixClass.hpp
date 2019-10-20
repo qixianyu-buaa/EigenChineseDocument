@@ -29,6 +29,7 @@ namespace Section1_MatrixClass
 
 void CoefficientAccessors()
 {
+        LOG();
         // MatrixXd type represents a matrix of arbitrary size (hence the X in MatrixXd), in which every entry is a double (hence the d in MatrixXd)
         // Declares a variable of type MatrixXd and specifies that it is a matrix with 2 rows and 2 columns (the entries are not initialized).
         // 定义矩阵大小，但未初始化,该方式在堆上分配内存
@@ -53,6 +54,7 @@ void CoefficientAccessors()
 
 void CommaInitialization()
 {
+        LOG();
         //矩阵和矢量系数可以使用所谓的逗号初始化语法方便地设置。现在，只需要知道以下示例即可：
         Matrix3f m;
         m << 1, 2, 3,
@@ -63,7 +65,7 @@ void CommaInitialization()
 
 void Resizing()
 {
-
+        LOG();
         //矩阵的当前大小可以通过rows()，cols()和size()获取。
         //这些方法分别返回行数，列数和系数数。调整动态大小矩阵的大小是通过resize()方法完成的。
         // 如果实际矩阵大小不变，则resize()方法为空操作。
@@ -97,11 +99,11 @@ void Resizing()
 
 void MatrixAndVectorRunTime()
 {
+        LOG();
         // 固定大小的矩阵or向量在栈上分配内存，因为它在编译时期就可以确定大小
         // Matrix4f mymatrix  ≈  float mymatrix[16];
         // MatrixX表示运行时才确定矩阵的大小，因为它在堆上分配内存
         // MatrixXf mymatrix(rows,columns) ≈  float *mymatrix = new float[rows*columns];
-
         MatrixXd m = MatrixXd::Random(3, 3);          //  random values between -1 and 1
         m = (m + MatrixXd::Constant(3, 3, 1.2)) * 50; // MatrixXd::Constant(3, 3, 1.2) represents a 3-by-3 matrix expression having all coefficients equal to 1.2
         cout << "m =" << endl
@@ -114,6 +116,7 @@ void MatrixAndVectorRunTime()
 
 void MatrixAndVectorCompileTime()
 {
+        LOG();
         // 编译时可确定矩阵尺寸，在栈上分配内存
         Matrix3d m = Matrix3d::Random(); //a fixed size
         m = (m + Matrix3d::Constant(1.2)) * 50;
@@ -127,6 +130,7 @@ void MatrixAndVectorCompileTime()
 
 void AssignmentAndResizing()
 {
+        LOG();
         //operator= 将矩阵复制到另一个矩阵中的操作。Eigen自动调整左侧矩阵的大小，使其与右侧大小的矩阵大小匹配。例如：
         MatrixXf a(2, 2);
         std::cout << "a is of size " << a.rows() << "x" << a.cols() << std::endl;
@@ -138,6 +142,7 @@ void AssignmentAndResizing()
 void FixedSizeAndDynamicSize()
 {
 
+        LOG();
         //固定尺寸与动态尺寸
         // 什么时候应该使用固定尺寸（例如Matrix4f），什么时候应该使用动态尺寸（例如MatrixXf）？
         //简单的答案是：在可能的地方使用固定尺寸来显示非常小的尺寸，在需要的地方使用动态尺寸来显示较大的尺寸。
@@ -160,7 +165,7 @@ void FixedSizeAndDynamicSize()
 
 void OptionalTemplateParameters()
 {
-
+        LOG();
         // 可选模板参数
         // 我们在页面开始时提到Matrix类采用六个模板参数，但到目前为止，我们仅讨论了前三个。其余三个参数是可选的。这是模板参数的完整列表：
 
@@ -176,11 +181,12 @@ void OptionalTemplateParameters()
         // Matrix<float，3、3，RowMajor>
         // MaxRowsAtCompileTime并且MaxColsAtCompileTime在您希望指定时很有用，即使在编译时不知道矩阵的确切大小，在编译时也知道固定的上限。
         //您可能要这样做的最大原因是避免动态内存分配。例如，以下矩阵类型使用12个浮点数的普通数组，而不分配动态内存：
-        // 矩阵<float，动态，动态，0、3、4>
+        // Matrix<float，Dynamic，Dynamic，0、3、4>
 }
 
 void ConvenienceTypedefs()
 {
+        LOG();
         // Eigen定义了以下Matrix typedef：
 
         // MatrixNt for Matrix<type, N, N>. For example, MatrixXi for Matrix<int, Dynamic, Dynamic>.

@@ -107,7 +107,7 @@ void ChangingTheMappedArray()
         //         b(i) = A.trace();
         // }
 }
-} // namespace Part7_MapClass
+} // namespace Section7_MapClass
 
 } // namespace Chapter1_DenseMatrixAndArrary
 

@@ -214,6 +214,6 @@ void CombiningBroadcastingWithOtherOperations()
         cout << "Nearest neighbour is column " << index << ":" << endl;
         cout << m.col(index) << endl;
 }
-} // namespace ReductionsVisitorsBroadcasting
+} // namespace Section6_ReductionsVisitorsBroadcasting
 } // namespace Chapter1_DenseMatrixAndArrary
 #endif

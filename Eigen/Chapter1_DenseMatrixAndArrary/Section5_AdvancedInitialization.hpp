@@ -3,22 +3,25 @@
 #include "HeaderFile.h"
 namespace Chapter1_DenseMatrixAndArrary
 {
-namespace Section5_AdvancedInitialization
-{
 // 本页讨论了几种初始化矩阵的高级方法。
 // 它提供了有关之前介绍的逗号初始化程序的更多详细信息。
-//  它还说明了如何获得特殊矩阵，例如单位矩阵和零矩阵。
+// 它还说明了如何获得特殊矩阵，例如单位矩阵和零矩阵。
+
+namespace Section5_AdvancedInitialization
+{
 
 void CommaInitializer()
 {
         // Eigen提供了一种逗号初始化器语法，该语法使用户可以轻松设置矩阵，向量或数组的所有系数
         // 简单地列出系数，开始在左上角，并从左至右，从顶部向底部移动。需要预先指定对象的大小。
         // 如果列出的系数太少或太多，就会报错。
+        LOG();
         Matrix3f mat;
         mat << 1, 2, 3,
             4, 5, 6,
             7, 8, 9;
-        std::cout << mat;
+
+        std::cout << mat << endl;
 
         //此外，初始化列表的元素本身可以是向量或矩阵。
         //通常的用途是将向量或矩阵连接在一起。
@@ -57,6 +60,7 @@ void SpecialMatricesAndArrays()
         //第一个变体不带参数，只能用于固定大小的对象。如果要将动态尺寸对象初始化为零，则需要指定尺寸。
         //第二个变体需要一个参数，并且可以用于一维动态尺寸对象，
         //第三个变体需要两个参数，并且可以用于二维对象。
+        LOG();
         std::cout << "A fixed-size array:\n";
         Array33f a1 = Array33f::Zero();
         std::cout << a1 << "\n\n";
@@ -112,6 +116,7 @@ void UsageAsTemporaryObjects()
         //如上所示，可以在声明时或在赋值运算符的右侧使用静态方法Zero（）和Constant（）来初始化变量。
         //您可以将这些方法视为返回矩阵或数组。实际上，它们返回所谓的表达式对象，这些表达式对象在需要时求值到矩阵或数组，因此该语法不会产生任何开销。
         //这些表达式也可以用作临时对象。
+        LOG();
         MatrixXd m = MatrixXd::Random(3, 3);
         m = (m + MatrixXd::Constant(3, 3, 1.2)) * 50;
         cout << "m =" << endl
@@ -135,6 +140,6 @@ void UsageAsTemporaryObjects()
         std::cout << mat << std::endl;
 }
 
-} // namespace AdvancedInitialization
+} // namespace Section5_AdvancedInitialization
 } // namespace Chapter1_DenseMatrixAndArrary
 #endif
