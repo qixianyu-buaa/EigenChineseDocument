@@ -30,6 +30,7 @@ namespace Section7_MapClass
 
 void MapConstruct()
 {
+        LOG();
         int array[8];
         for (int i = 0; i < 8; ++i)
                 array[i] = i;
@@ -55,6 +56,7 @@ void MapConstruct()
 
 void UsingMapVariables()
 {
+        LOG();
         typedef Matrix<float, 1, Dynamic> MatrixType;
         typedef Map<MatrixType> MapType;
         typedef Map<const MatrixType> MapTypeConst; // a read-only map
@@ -86,6 +88,7 @@ void UsingMapVariables()
 
 void ChangingTheMappedArray()
 {
+        LOG();
         //可以使用C ++“ placement new"(位置new，在程序员给定的内存放置元素) 语法更改已声明的Map对象的数组
         ////尽管有出现，但它不会调用内存分配器，因为语法指定了存储结果的位置。(具体参考《C++primer》中的内容)
         // 简单的说，位置new只是在指定位置写入内容，并不会像new一样，先在堆上分配内存，然后再依次初始化对象，

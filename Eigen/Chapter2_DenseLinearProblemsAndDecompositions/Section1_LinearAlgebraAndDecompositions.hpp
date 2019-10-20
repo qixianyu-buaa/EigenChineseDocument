@@ -12,6 +12,7 @@ namespace Section1_LinearAlgebraAndDecompositions
 //但是，让我们从一个适用于所有情况的示例开始，这是一个很好的折衷方案：
 void BasicLinearSolving()
 {
+        LOG();
         Matrix3f A;
         Vector3f b;
         A << 1, 2, 3, 4, 5, 6, 7, 8, 10;
@@ -88,6 +89,7 @@ void BasicLinearSolving()
 
 void CheckingIfASolutionReallyExists()
 {
+        LOG();
         //计算相对误差的方法
         //只有您知道要允许解决方案被视为有效的误差范围。因此，Eigen允许您自己进行此计算，如以下示例所示：
         MatrixXd A = MatrixXd::Random(100, 100);
@@ -103,6 +105,7 @@ void CheckingIfASolutionReallyExists()
 
 void ComputingEigenvaluesAndEigenvectors()
 {
+        LOG();
         //您需要在此处进行特征分解， 确保检查矩阵是否是自伴随的，
         //在数学里，作用于一个有限维的内积空间，一个自伴算子(self-adjoint operator)等于自己的伴随算子；等价地说，表达自伴算子的矩阵是埃尔米特矩阵。埃尔米特矩阵等于自己的共轭转置。根据有限维的谱定理，必定存在着一个正交归一基，可以表达自伴算子为一个实值的对角矩阵。
         // 就像在这些问题中经常发生的那样。这是一个使用SelfAdjointEigenSolver的示例，可以使用EigenSolver或ComplexEigenSolver轻松地将其应用于一般矩阵。
@@ -134,6 +137,7 @@ void ComputingEigenvaluesAndEigenvectors()
 
 void ComputingInverseAndDeterminant()
 {
+        LOG();
         //首先，请确保您确实想要这个。尽管逆和行列式是基本的数学概念，但在数值线性代数中，它们不如在纯数学中流行。
         //逆计算通常可以用solve（）操作代替，而行列式通常不是检查矩阵是否可逆的好方法。
         //但是，对于非常 小的矩阵，上述条件是不正确的，并且逆和行列式可能非常有用。
@@ -164,6 +168,7 @@ void ComputingInverseAndDeterminant()
 
 void LeastSquaresSolving()
 {
+        LOG();
         //最小二乘求解的最准确方法是SVD分解。Eigen提供了两种实现。
         //推荐的对象是BDCSVD类，它可以很好地解决较大的问题，并自动退回到JacobiSVD类以解决较小的问题。
         //对于这两个类，它们的resolve（）方法都在进行最小二乘求解。
@@ -194,6 +199,7 @@ void LeastSquaresSolving()
 
 void SeparatingTheComputationFromTheConstruction()
 {
+        LOG();
         // 在以上示例中，在构造分解对象的同时计算了分解。但是，在某些情况下，您可能希望将这两件事分开，
         //例如，如果在构造时不知道要分解的矩阵，则可能会需要将它们分开。或者您想重用现有的分解对象。
         // 使之成为可能的原因是：
@@ -229,6 +235,7 @@ void SeparatingTheComputationFromTheConstruction()
 }
 void RankRevealingDecompositions()
 {
+        LOG();
         //某些分解是揭示矩阵秩的。
         //这些通常也是在非满秩矩阵（在方形情况下表示奇异矩阵）的情况下表现最佳的分解。
         //秩揭示分解至少提供了rank()方法。它们还可以提供方便的方法，例如isInvertible()，

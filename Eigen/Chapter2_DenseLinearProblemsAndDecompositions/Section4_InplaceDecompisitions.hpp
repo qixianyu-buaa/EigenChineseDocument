@@ -10,6 +10,7 @@ namespace Section4_InplaceDecompisitions
 {
 void InplaceMatrixDecompositions()
 {
+        LOG();
         // 从Eigen 3.3开始，LU，Cholesky和QR分解可以就地进行操作，即直接在给定的输入矩阵内进行。
         //当处理大量矩阵或可用内存非常有限（嵌入式系统）时，此功能特别有用。
 
@@ -57,7 +58,6 @@ void InplaceMatrixDecompositions()
         // Output is:
         //Residual: 0
         //在这里，由于原始矩阵的内容A已丢失，因此我们必须声明一个新矩阵A0以验证结果。
-
 
         //由于在A和lu之间共享内存，因此修改矩阵A将导致lu无效。
         //可以通过修改的内容A并尝试再次解决初始问题来轻松验证这一点：

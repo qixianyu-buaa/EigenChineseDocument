@@ -11,6 +11,7 @@ namespace Section8_ReshapeSlicing
 {
 void Reshape()
 {
+         LOG();
         // 重塑
         //整形操作在于修改矩阵的大小，同时保持相同的系数。
         //除了修改输入矩阵本身（这对于编译时大小而言是不可能的）之外，
@@ -54,6 +55,7 @@ void Reshape()
 
 void Slicing()
 {
+         LOG();
         //切片包括获取一组在矩阵内均匀间隔的行，列或元素。再次，Map类可以轻松模仿此功能。
         //例如，可以跳过向量中的每个P元素：
         RowVectorXf v = RowVectorXf::LinSpaced(20, 0, 19);

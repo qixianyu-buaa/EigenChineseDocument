@@ -15,8 +15,10 @@ namespace Chapter1_DenseMatrixAndArrary
 
 // Eigen还为某些常见情况提供了typedef，其方式类似于Matrix typedef，但有一些细微的差异
 // 因为单词“ array”既用于一维数组，也用于二维数组.
-//我们采用ArrayNt形式的typedef代表一维数组的约定，其中N和t是大小和标量类型
-// 对于二维数组，我们使用ArrayNNt形式的typedef
+
+//**一维数组**采用ArrayNt形式的typedef代表，其中N和t是大小和标量类型
+
+// **二维数组**采用ArrayNNt形式的typedef
 // Type	                                                        Typedef
 // Array<float,Dynamic,1>                   ArrayXf
 // Array<float,3,1>                                            Array3f
@@ -59,8 +61,10 @@ void AccessingValuesInsideAnArray()
 void AdditionAndSubtraction()
 {
         // 加减法
-        // 两个数组的加减法与矩阵相同。如果两个数组的大小相同，并且该加法或减法是按系数进行的，则此操作有效。
-        // 数组还支持以下形式的表达式，该表达式array + scalar将标量添加到数组中的每个系数。这提供了不能直接用于Matrix对象的功能。
+        // 两个数组的加减法与矩阵相同。
+        // 如果两个数组的大小相同，并且该加法或减法是按系数进行的，则此操作有效。
+        // 数组还支持以下形式的表达式，该表达式array + scalar将标量添加到数组中的每个系数。
+        // 这提供了不能直接用于Matrix对象的功能。
         LOG();
         ArrayXXf a(3, 3);
         ArrayXXf b(3, 3);
@@ -154,8 +158,6 @@ void OtherCoefficientwiseOperations()
         //   1.09
         //   1.28
 }
-
-
 
 void ConvertingBetweenArrayAndMatrixExpressions()
 {

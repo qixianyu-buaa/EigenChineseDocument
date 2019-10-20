@@ -176,8 +176,8 @@ void OptionalTemplateParameters()
         //        int MaxRowsAtCompileTime = RowsAtCompileTime,
         //        int MaxColsAtCompileTime = ColsAtCompileTime>
 
-        // Options是位字段。在这里，我们只讨论一点：RowMajor。它指定这种类型的矩阵使用行优先存储顺序。默认情况下，存储顺序为“大列”。
-        //请参阅有关存储订单的页面。例如，此类型表示行优先的3x3矩阵：
+        // Options是位字段。在这里，我们只讨论一点：RowMajor。它指定这种类型的矩阵使用行优先存储顺序。默认情况下，存储顺序为“按列的顺序存储”。
+        //请参阅有关存储顺序的页面。例如，此类型表示行优先存储的3x3矩阵：
         // Matrix<float，3、3，RowMajor>
         // MaxRowsAtCompileTime并且MaxColsAtCompileTime在您希望指定时很有用，即使在编译时不知道矩阵的确切大小，在编译时也知道固定的上限。
         //您可能要这样做的最大原因是避免动态内存分配。例如，以下矩阵类型使用12个浮点数的普通数组，而不分配动态内存：

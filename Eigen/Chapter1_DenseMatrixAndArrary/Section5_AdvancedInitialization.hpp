@@ -12,10 +12,12 @@ namespace Section5_AdvancedInitialization
 
 void CommaInitializer()
 {
-        // Eigen提供了一种逗号初始化器语法，该语法使用户可以轻松设置矩阵，向量或数组的所有系数
-        // 简单地列出系数，开始在左上角，并从左至右，从顶部向底部移动。需要预先指定对象的大小。
-        // 如果列出的系数太少或太多，就会报错。
         LOG();
+        // Eigen提供了一种逗号初始化器语法，该语法使用户可以轻松设置矩阵，向量或数组的所有系数
+        // 简单地列出系数，开始在左上角，并从左至右，从顶部向底部移动。
+        // 需要预先指定对象的大小。
+        // 如果列出的系数太少或太多，就会报错。
+
         Matrix3f mat;
         mat << 1, 2, 3,
             4, 5, 6,
@@ -55,12 +57,13 @@ void CommaInitializer()
 
 void SpecialMatricesAndArrays()
 {
-        // Matrix和Array有静态方法，可以帮助初始化；
+        LOG();
+        // 模板类Matrix<>和Array<>有静态方法，可以帮助初始化；
         //有三种变体:
         //第一个变体不带参数，只能用于固定大小的对象。如果要将动态尺寸对象初始化为零，则需要指定尺寸。
         //第二个变体需要一个参数，并且可以用于一维动态尺寸对象，
         //第三个变体需要两个参数，并且可以用于二维对象。
-        LOG();
+
         std::cout << "A fixed-size array:\n";
         Array33f a1 = Array33f::Zero();
         std::cout << a1 << "\n\n";
@@ -71,12 +74,16 @@ void SpecialMatricesAndArrays()
         ArrayXXf a3 = ArrayXXf::Zero(3, 4);
         std::cout << a3 << "\n";
 
-        //同样，静态方法Constant（value）会将所有系数设置为value。
+        //同样，静态方法Constant(value)会将所有系数设置为value。
         // 如果需要指定对象的大小，则附加参数放在value参数之前，如
         // MatrixXd::Constant(rows, cols, value)。
-        //方法Random（）用随机系数填充矩阵或数组。
-        //可以通过调用Identity（）获得单位矩阵；此方法仅适用于Matrix，不适用于Array，因为“恒等矩阵”是线性代数概念。该方法LinSpaced（尺寸，低，高）是仅可用于载体和一维数组; 它产生一个指定大小的向量，其系数在low和之间平均间隔high。
-        //方法LinSpaced() 以下示例说明了该示例，该示例打印一张表格，其中包含以度为单位的角度，以弧度为单位的相应角度以及它们的正弦和余弦值。
+
+        //Random()用随机系数填充矩阵或数组。
+
+        //Identity()获得单位矩阵, 此方法仅适用于Matrix，不适用于Array，因为“单位矩阵”是线性代数概念。
+
+        //该方法LinSpaced（尺寸，低，高）是仅可用于载体和一维数组; 它产生一个指定大小的向量，其系数在low和之间平均间隔high。
+        //方法LinSpaced()以下示例说明了该示例，该示例打印一张表格，其中包含以度为单位的角度，以弧度为单位的相应角度以及它们的正弦和余弦值。
         ArrayXXf table(10, 4);
         table.col(0) = ArrayXf::LinSpaced(10, 0, 90);
         table.col(1) = M_PI / 180 * table.col(0);
@@ -85,9 +92,11 @@ void SpecialMatricesAndArrays()
         std::cout << "  Degrees   Radians      Sine    Cosine\n";
         std::cout << table << std::endl;
 
-        //Eigen定义了诸如setZero（），MatrixBase :: setIdentity（）和DenseBase :: setLinSpaced（）之类的实用程序函数来方便地执行此操作。
+        //Eigen定义了诸如setZero()，MatrixBase :: setIdentity（）和DenseBase :: setLinSpaced()之类的实用程序函数来方便地执行此操作。
+        //即，可以采用对象的成员函数设置初始值。
+
         //下面的示例对比了三种构造矩阵的J =[O  I ; I O ] 方法
-        // 使用静态方法和赋值，使用setXxx（）方法，使用静态方法和逗号初始化
+        // 使用静态方法和operator=
         const int size = 6;
         MatrixXd mat1(size, size);
         mat1.topLeftCorner(size / 2, size / 2) = MatrixXd::Zero(size / 2, size / 2);
@@ -96,7 +105,7 @@ void SpecialMatricesAndArrays()
         mat1.bottomRightCorner(size / 2, size / 2) = MatrixXd::Zero(size / 2, size / 2);
         std::cout << mat1 << std::endl
                   << std::endl;
-
+        //使用.setXxx()方法
         MatrixXd mat2(size, size);
         mat2.topLeftCorner(size / 2, size / 2).setZero();
         mat2.topRightCorner(size / 2, size / 2).setIdentity();
@@ -105,7 +114,8 @@ void SpecialMatricesAndArrays()
         std::cout << mat2 << std::endl
                   << std::endl;
         MatrixXd mat3(size, size);
-
+        
+        //使用静态方法和逗号初始化
         mat3 << MatrixXd::Zero(size / 2, size / 2), MatrixXd::Identity(size / 2, size / 2),
             MatrixXd::Identity(size / 2, size / 2), MatrixXd::Zero(size / 2, size / 2);
         std::cout << mat3 << std::endl;
@@ -113,10 +123,12 @@ void SpecialMatricesAndArrays()
 
 void UsageAsTemporaryObjects()
 {
-        //如上所示，可以在声明时或在赋值运算符的右侧使用静态方法Zero（）和Constant（）来初始化变量。
-        //您可以将这些方法视为返回矩阵或数组。实际上，它们返回所谓的表达式对象，这些表达式对象在需要时求值到矩阵或数组，因此该语法不会产生任何开销。
-        //这些表达式也可以用作临时对象。
         LOG();
+        //如上所示，可以在声明时或在赋值运算符的右侧使用静态方法Zero()和Constant()来初始化变量。
+        //您可以将这些方法视为返回矩阵或数组。
+        //实际上，它们返回所谓的**表达式对象**，这些表达式对象在需要时求值到矩阵或数组，因此该语法不会产生任何开销。
+        //这些表达式也可以用作临时对象。
+
         MatrixXd m = MatrixXd::Random(3, 3);
         m = (m + MatrixXd::Constant(3, 3, 1.2)) * 50;
         cout << "m =" << endl

@@ -10,6 +10,7 @@ namespace Section6_ReductionsVisitorsBroadcasting
 
 void Reductions()
 {
+        LOG();
         //在Eigen中，约简是一个采用矩阵或数组并返回单个标量值的函数。最常用的归约方法之一是.sum（），它返回给定矩阵或数组内所有系数的总和。
         Eigen::Matrix2d mat;
         mat << 1, 2,
@@ -24,6 +25,7 @@ void Reductions()
 
 void NormComputations()
 {
+        LOG();
         // 2范数的平方可以通过squaredNorm()获得。它本身等于矢量的点积，并且等效于其系数的平方绝对值的总和。
         //  norm（）方法返回squaredNorm（）的平方根。
         // 这些运算也可以在矩阵上运算。在这种情况下，n×p矩阵被视为大小（n * p）的向量，
@@ -62,6 +64,7 @@ void NormComputations()
 
 void BooleanReductions()
 {
+        LOG();
         // 矩阵或者数组皆有与，或，个数的方法
         // all() returns true if all of the coefficients in a given Matrix or Array evaluate to true .
         // any() returns true if at least one of the coefficients in a given Matrix or Array evaluates to true .
@@ -81,6 +84,7 @@ void BooleanReductions()
 
 void Visitors()
 {
+        LOG();
         // 这是在矩阵和数组的所有元素中
         //想要获得一个系数在Matrix或Array中的位置时，访问者很有用。
         //最简单的示例是maxCoeff（＆x，＆y）和minCoeff（＆x，＆y），可用于查找Matrix或Array中最大或最小系数的位置。
@@ -102,6 +106,7 @@ void Visitors()
 
 void PartialReductions()
 {
+        LOG();
         // 这是在矩阵或数组的列向量和行向量中
         // 记住,element-wise是按元素的，那么colwise()或rowwise()表示按列或行的
         //部分归约是可以在Matrix或Array上按列或按行操作的归约，对每个列或行应用归约运算并返回具有相应值的列或行向量。
@@ -123,6 +128,7 @@ void PartialReductions()
 
 void CombiningPartialReductionsWithOtherOperations()
 {
+        LOG();
 
         MatrixXf mat(2, 4);
         mat << 1, 2, 6, 9,
@@ -145,6 +151,7 @@ void CombiningPartialReductionsWithOtherOperations()
 
 void Broadcasting()
 {
+        LOG();
         //广播背后的概念类似于部分归约，区别在于广播构造了一个表达式，其中向量（列或行）通过在一个方向上复制而被解释为矩阵。
         //一个简单的示例是将某个列向量添加到矩阵中的每一列。这可以通过以下方式完成：
         Eigen::MatrixXf mat(2, 4);
@@ -198,8 +205,10 @@ void Broadcasting()
 
 void CombiningBroadcastingWithOtherOperations()
 {
+        LOG();
         // 广播还可以与其他操作（例如矩阵或阵列操作），归约和部分归约相结合。
-        //现在已经介绍了广播，约简和部分约简，我们可以深入研究一个更高级的示例，该示例v在矩阵的列中找到向量的最近邻居m。欧几里德距离将在本示例中使用，计算具有部分归约名为squaredNorm（）的平方欧几里德距离：
+        //现在已经介绍了广播，约简和部分约简，我们可以深入研究一个更高级的示例，该示例v在矩阵的列中找到向量的最近邻m。
+        //欧几里德距离将在本示例中使用，计算具有部分归约名为squaredNorm()的平方欧几里德距离：
         Eigen::MatrixXf m(2, 4);
         Eigen::VectorXf v(2);
 

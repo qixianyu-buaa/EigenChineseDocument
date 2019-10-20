@@ -41,6 +41,6 @@ namespace Section5_BenchmarkOfDenseDecompositions
 // CompleteOrthogonalDecomposition基于ColPivHouseholderQR，因此可以达到相同的性能水平。
 // 上表是由bench / dense_solvers.cpp文件生成的，可以随意修改以生成与您的硬件，编译器和喜欢的问题大小相匹配的表。
 
-}
+} // namespace Section5_BenchmarkOfDenseDecompositions
 } // namespace Chapter2_DenseLinearProblemsAndDecompositions
 #endif

@@ -5,7 +5,7 @@ namespace Chapter1_DenseMatrixAndArrary
 {
 namespace Section2_MatrixAndVectorArithmetic
 {
-// 前言：
+
 // 本部分介绍了矩阵在线性代数中的基本运算，相信学过线性代数的同学理解起来十分容易
 // 需要注意的是：
 //      1)对于a = a.transpose()操作，应该使用a.transposeInPlace(),  见TranspositionAndConjugation()
@@ -91,7 +91,7 @@ void ScalarMultiplicationAndDivision()
 }
 void ANoteAboutExpressionTemplates()
 {
-         LOG();
+        LOG();
         // 在Eigen中，诸如算术运算符（例如）operator+自己并不执行任何计算,
         // 它们仅返回描述要执行的计算的“表达式对象”。当计算整个表达式时，实际的计算将在稍后进行，
         // 通常在中operator=。尽管这听起来很沉重，但是任何现代的优化编译器都可以优化该抽象，从而获得完美优化的代码。例如，当您这样做时：
@@ -274,7 +274,7 @@ void ValidityOfoperations()
 {
         LOG();
         // Eigen的输出很操蛋，但是它把输出中关键的信息大写了～
-        // 如果你想看到错误输出，则注释掉下面的内容
+        // 如果你想体验一下Eigen的错误输出，则注释掉下面的内容
 
         // Matrix3f m;
         // Vector4f v;

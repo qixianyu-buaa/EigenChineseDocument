@@ -27,6 +27,7 @@ namespace Section9_Aliasing
 
 void Aliasing()
 {
+        LOG();
         //在Eigen中，混淆(aliasing)是指相同的矩阵（或数组或向量）出现在赋值运算符的左侧和右侧的赋值语句。
         // 例如mat = 2 * mat(虽混淆但无害);或mat = mat.transpose();(有害的混淆)。
 
@@ -68,14 +69,16 @@ void Aliasing()
         //通常，在编译时无法检测到混淆：如果mat在第一个示例中稍大一点，则块将不会重叠，也不会出现混淆问题。
         //但是Eigen确实会在运行时检测到一些混淆实例。Matrix和向量算术中提到了以下显示别名的示例：
 
-        // 这段代码会报错
-        Matrix2i a;
-        a << 1, 2, 3, 4;
-        cout << "Here is the matrix a:\n"
-             << a << endl;
-        a = a.transpose(); // !!! do NOT do this !!!
-        cout << "and the result of the aliasing effect:\n"
-             << a << endl;
+        // 注意：这段代码会报错～～～～～～
+
+        // Matrix2i a;
+        // a << 1, 2, 3, 4;
+        // cout << "Here is the matrix a:\n"
+        //      << a << endl;
+        // a = a.transpose(); // !!! do NOT do this !!!
+        // cout << "and the result of the aliasing effect:\n"
+        //      << a << endl;
+
         // 输出显示混淆(alising)问题。
         // 但是，默认情况下，Eigen使用运行时断言来检测到此情况并退出，并显示如下消息
         // void Eigen::DenseBase<Derived>::checkTransposeAliasing(const OtherDerived&) const
@@ -88,6 +91,7 @@ void Aliasing()
 
 void ResolvingAliasingIssues()
 {
+        LOG();
         //解决方法：Eigen必须将右侧完全看作一个临时矩阵/数组，然后将其分配给左侧。
         //函数**eval()**正是这样做的,作用为生成一个临时对象
         MatrixXi mat(3, 3);
@@ -108,6 +112,7 @@ void ResolvingAliasingIssues()
         a.transposeInPlace();
         cout << "and after being transposed:\n"
              << a << endl;
+             
         //如果xxxInPlace()函数可用，则最好使用它，因为它可以更清楚地指示您正在做什么。
         //这也可以让Eigen更积极地进行优化。这些是提供的一些xxxInPlace()函数：
         // Original function	                      In-place function
@@ -123,6 +128,7 @@ void ResolvingAliasingIssues()
 
 void AliasingAndComponentWiseOperations()
 {
+        LOG();
         //如果同一矩阵或数组同时出现在赋值运算符的左侧和右侧，则可能很危险，因此通常有必要显示地评估右侧
         //但是，应用基于元素的操作（例如矩阵加法，标量乘法和数组乘法）是安全的。
         //以下示例仅具有基于组件的操作。因此，即使相同的矩阵出现在赋值符号的两侧，也不需要eval()。
@@ -176,15 +182,17 @@ void AliasingAndComponentWiseOperations()
 
 void AliasingAndMatrixMultiplication()
 {
-        // 若假定混淆，则会使用eval()生成临时对象,所以是安全的。
+        LOG();
+
         //在目标矩阵**未调整大小**的情况下，矩阵乘法是Eigen中唯一假定默认情况下为混淆的。
+        // 若假定混淆，则会使用eval()生成临时对象,所以是安全的。
         //因此，如果matA是平方矩阵，则该语句matA = matA * matA是安全的。
         //Eigen中的所有其他操作都假定没有混淆问题，这是因为结果被分配给了不同的矩阵，或者因为它是逐个元素的操作。
         {
                 MatrixXf matA(2, 2);
                 matA << 2, 0, 0, 2;
                 matA = matA * matA;
-                cout << matA;
+                cout << matA << endl;
         }
 
         // 但是，这是有代价的。执行表达式时matA = matA * matA
@@ -199,11 +207,10 @@ void AliasingAndMatrixMultiplication()
                 matA << 2, 0, 0, 2;
                 // Simple but not quite as efficient
                 matB = matA * matA;
-                cout << matB << endl
-                     << endl;
+                cout << matB << endl;
                 // More complicated but also more efficient
                 matB.noalias() = matA * matA;
-                cout << matB;
+                cout << matB << endl;
                 // Output is:
                 //4 0
                 // 0 4
@@ -214,13 +221,13 @@ void AliasingAndMatrixMultiplication()
 
         {
                 //当然，不应该在实际上发生混淆时使用noalias()，如果这样做，则**可能**会得到错误的结果：
+                //报错吗？我的平台上没报错
                 MatrixXf matA(2, 2);
                 matA << 2, 0, 0, 2;
                 matA.noalias() = matA * matA;
-                cout << matA;
-
-                // Output is:  报错吗？
-                // 4 0
+                cout << matA << endl;
+                // Output is:
+                //4 0
                 // 0 4
         }
 
@@ -232,8 +239,12 @@ void AliasingAndMatrixMultiplication()
                 B << 2, 0, 0, 3, 1, 1;
                 A << 2, 0, 0, -2;
                 A = (B * A).cwiseAbs(); // 由于不假定混淆，所以需要我们显示评价
-                cout << A;
-                //报错吗？
+                cout << A << endl;
+                //报错吗？我的平台上没报错
+                // Output is
+                // 4 0
+                // 0 6
+                // 2 2
         }
 
         {
@@ -242,7 +253,7 @@ void AliasingAndMatrixMultiplication()
                 B << 2, 0, 0, 3, 1, 1;
                 A << 2, 0, 0, -2;
                 A = (B * A).eval().cwiseAbs();
-                cout << A;
+                cout << A << endl;
 
                 // Output is
                 // 4 0

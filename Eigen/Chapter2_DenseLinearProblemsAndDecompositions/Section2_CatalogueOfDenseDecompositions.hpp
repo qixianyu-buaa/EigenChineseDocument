@@ -29,7 +29,6 @@ namespace Section2_CatalogueOfDenseDecompositions
 
 // LDLT	正或负半定	非常快	   好    	--	--	是	优秀的	 很快：Blocking
 
-
 // 奇异值和特征值分解
 
 // BDCSVD（分而治之）	--	最快的SVD算法之一	优秀的	是	奇异值/向量，最小二乘	是的（并且最小二乘）	优秀的	阻断  双对角化
@@ -43,7 +42,6 @@ namespace Section2_CatalogueOfDenseDecompositions
 // 特征解算器	正方形和实数	平均-慢  	取决于条件数	是	特征值/向量	--	一般	--
 
 // 广义自我伴随特征求解	  方阵	快速-一般2	取决于条件数	--	广义特征值/向量	--	好	 --
-
 
 // 辅助分解
 
@@ -75,7 +73,7 @@ namespace Section2_CatalogueOfDenseDecompositions
 // 意味着该算法已显式并行化，以通过OpenMP利用多核处理器。
 // 元展开器
 // 意味着对于很小的固定大小矩阵，该算法将自动显式展开。
-}
+} // namespace Section2_CatalogueOfDenseDecompositions
 } // namespace Chapter2_DenseLinearProblemsAndDecompositions
 
 #endif

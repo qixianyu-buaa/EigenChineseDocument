@@ -21,7 +21,6 @@ namespace Chapter1_DenseMatrixAndArrary
 //可以将使用一种存储顺序的矩阵和数组分配给使用另一种存储顺序的矩阵和数组，如一个按行存储的矩阵使用按列存储矩阵初始化。
 //Eigen将自动对元素重新排序。更一般而言，按行存储矩阵和按列存储矩阵可以根据需要在表达式中混合使用。
 
-
 //选择哪个存储顺序？
 //那么，您应该在程序中使用哪个存储顺序？这个问题没有简单的答案。这取决于您的应用程序。请记住以下几点：
 
@@ -35,6 +34,7 @@ namespace Section10_StorageOrders
 
 void testColumnAndRowMajorStorage()
 {
+        LOG();
         // PlainObjectBase::data()  返回第一个元素的内存位置，和C++的数组名作用一样
 
         Matrix<int, 3, 4, ColMajor> Acolmajor;
