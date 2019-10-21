@@ -16,4 +16,6 @@
 using namespace Eigen;
 using namespace std;
 
+#define LOG() printf("\n=========  %s() Output is  ========= \n", __FUNCTION__);
+
 #endif

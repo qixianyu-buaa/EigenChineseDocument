@@ -1,5 +1,7 @@
 #ifndef SPARSE_MATRIX_MANIPULATIONS_HPP
 #define SPARSE_MATRIX_MANIPULATIONS_HPP
+#include "HeaderFile.h"
+#include "HelpFunctions.hpp"
 namespace Chapter3_SparseLinearAlgebra
 {
 namespace Section1_SparseMatrixManipulations
@@ -8,7 +10,7 @@ namespace Section1_SparseMatrixManipulations
 // 在许多应用中（例如，有限元方法），通常处理非常大的矩阵，其中只有几个系数与零不同。
 // 在这种情况下，通过使用仅存储非零系数的专用表示，可以减少内存消耗并提高性能。这样的矩阵称为稀疏矩阵。
 
-// SparseMatrix类是Eigen的稀疏模块的主要稀疏矩阵表示。
+// SparseMatrix<>模板类是Eigen的稀疏模块的主要稀疏矩阵表示，注意稠密的用Matrix<>
 //它提供了高性能和低内存使用率。它实现了广泛使用的压缩列（或行）存储方案的更通用的变体。
 //它由四个紧凑数组组成：
 
@@ -28,16 +30,16 @@ namespace Section1_SparseMatrixManipulations
 
 // Values:	22	7	_	3	5	14	_	_	1	_	17	8
 
-//内部索引：  1 第一行  2第二行  _ 0 第零行 2 第2 行  4  第四行 ....
+//内部索引：  1 第一行  2第二行  _ 0 第零行 2 第二行  4  第四行 ....
 // InnerIndices:	1	2	_	0	2	4	_	_	2	_	1	4
 
 // 在前两个数组中的每一列的非零元素索引
 // OuterStarts:	0	3	5	8	10	12
 
 // 5个列中的非零元素个数
-// InnerNNZs:	2	2	1	1	2	
+// InnerNNZs:	2	2	1	1	2
 
-// 感觉上面这4个数组不能恢复矩阵的形式啊！！！
+// 感觉上面这4个数组不能恢复矩阵的形式，TODO：查找相关资料
 
 // 当前，确保始终通过增加内部索引来对给定内部向量的元素进行排序。
 //该"_"指示可用空间来快速插入新的元素。假设不需要重新分配，
@@ -63,15 +65,40 @@ namespace Section1_SparseMatrixManipulations
 // 一个稀疏向量是一个的一种特殊情况稀疏矩阵，其中只有Values和InnerIndices数组存储。
 //SparseVector没有压缩/未压缩模式的概念。
 
-
-
 // 第一个例子
 // 在描述每个类之前，让我们从以下典型示例开始：
-//$ \ Delta u = 0 $使用有限差分方案和Dirichlet边界条件在规则2D网格上求解拉普拉斯方程。这样的问题可以在数学上表示为以下形式的线性问题$ Ax = b $，其中$ x $是的矢量m未知数（在我们的情况下，所述像素的值），$ b $是从边界条件导致的右手侧向量，
-//并且$ $是$ m \次m $仅含有基质拉普拉斯算子离散化产生的非零元素很少。
+//$ \ Delta u = 0 $使用有限差分方案和Dirichlet边界条件在规则2D网格上求解拉普拉斯方程。
+//这样的问题可以在数学上表示为Ax = b形式的线性问题，其中x是一个m维向量，在本例中，它表示像素值, b是从边界条件中获得，
+//并且A是一个mXm的方阵，它是从离散化的拉普拉斯算子中获得的稀疏矩阵，即，只含有少数的非0元素
 
+void FirstExample()
+{
+        LOG();
 
+        int n = 300;   // size of the image
+        int m = n * n; // number of unknows (=number of pixels)
+        // Assembly:
+        std::vector<T> coefficients;      // list of non-zeros coefficients,在HelpFunctions.hpp中的```typedef Eigen::Triplet<double> T;```
+        Eigen::VectorXd b(m);             // the right hand side-vector resulting from the constraints
+        buildProblem(coefficients, b, n); //在HelpFunctions.hpp中的```void buildProblem(std::vector<T> &coefficients, Eigen::VectorXd &b, int n);```
+        SpMat A(m, m);
+        A.setFromTriplets(coefficients.begin(), coefficients.end());
+        // Solving:
+        Eigen::SimplicialCholesky<SpMat> chol(A); // performs a Cholesky factorization of A,即首先执行稀疏乔里斯基分解
+        Eigen::VectorXd x = chol.solve(b);        // use the factorization to solve for the given right hand side，然后求解Ax=b
 
+        // Export the result to a file:
+        saveAsBitmap(x, n, "result.bmp");
+}
+
+void TheSparseMatrixClass()
+{
+        LOG();
+        SparseMatrix<std::complex<float>> mat_c(1000, 2000); // declares a 1000x2000 column-major compressed sparse matrix of complex<float>
+        SparseMatrix<double, RowMajor> mat(1000, 2000);      // declares a 1000x2000 row-major compressed sparse matrix of double
+        SparseVector<std::complex<float>> vec_c(1000);       // declares a column sparse vector of complex<float> of size 1000
+        SparseVector<double, RowMajor> vec(1000);            // declares a row sparse vector of double of size 1000
+}
 } // namespace Section1_SparseMatrixManipulations
 } // namespace Chapter3_SparseLinearAlgebra
 #endif
