@@ -1,4 +1,5 @@
 #include "Chapter3_SparseLinearAlgebra/Section1_SparseMatrixManipulations.hpp"
+#include <Eigen/Geometry>
 void TestChapter3Section1()
 {
         Chapter3_SparseLinearAlgebra::Section1_SparseMatrixManipulations::FirstExample();
@@ -6,7 +7,7 @@ void TestChapter3Section1()
 
 void TestChapter3Section2()
 {
-        //TODO:继续翻译此部分
+        
         Chapter3_SparseLinearAlgebra::Section1_SparseMatrixManipulations::TheSparseMatrixClass();
 }
 

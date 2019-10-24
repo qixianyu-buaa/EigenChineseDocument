@@ -87,10 +87,6 @@ namespace Section11_AlignmentIssues
 // 出于这个原因，Eigen自己通过执行以下两项工作自行要求对Eigen :: Vector2d进行128位对齐：
 
 
-
-
-
-
 //原因2：STL容器或手动内存分配
 ///如果您将Stl容器（例如std :: vector，std :: map等）
 //与Eigen对象或包含Eigen对象的类一起使用，
@@ -98,7 +94,9 @@ namespace Section11_AlignmentIssues
 // struct my_class { ... Eigen::Matrix2f m; ... };
 // std::map<int, my_class> my_map;
 //请注意，此处Eigen :: Matrix2f仅用作示例，更一般而言，对于所有固定大小的可矢量化Eigen类型和具有此类Eigen对象作为member的结构，都会出现此问题。
-//任何类/函数都会绕过new分配内存的运算符，也就是通过执行自定义内存分配，然后调用placement new运算符，也会出现相同的问题。例如，通常就是这种情况，std::make_shared或者std::allocate_shared解决方案是使用对齐的分配器，如STL容器解决方案中所述。
+//任何类/函数都会绕过new分配内存的运算符，也就是通过执行自定义内存分配，然后调用placement new运算符，
+// 也会出现相同的问题。例如，通常就是这种情况，std::make_shared或者std::allocate_shared解决方案是使用对齐的分配器，
+//如STL容器解决方案中所述。
 
 //原因3：通过值传递Eigen对象
 //如果您代码中的某些函数正在通过值传递Eigen对象，例如这样，

@@ -44,3 +44,6 @@ target_link_libraries(chapter3_test ${Qt5Widgets_LIBRARIES} )
 else()
 target_link_libraries(chapter3_test  Qt4::QtGui )
 endif()
+
+
+add_executable(chapter4_test chapter4_test.cpp) # 编译第四章，请注意，第四章是我随便写了几行代码测试玩的

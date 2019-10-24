@@ -9,11 +9,12 @@
 - 官方文档中的代码不利于在本地运行，每次还得复制粘贴，编译运行，个人认为较为麻烦;
 - 为后来者种一棵小树，方便大家快速掌握Eigen。
 
-当前的文档还没有翻译完成，我也会找空闲的时间继续翻译。
-此外，已翻译完成的内容肯定需要改善，但是，本着先完成后完美的原则，我会先不顾质量，等完成后再修改。
+当前文档已初步完成，内容肯定需要改善。
 
 ## 版本
 Eigen  3.3.7
+
+请注意，此程序在3.2版本下会报错!请您确保版本的正确，或者您需要注释掉源码中的部分内容！
 
 ## 翻译说明
 此文档按照官方教程的结构体系，我把相关内容全部放入到C++代码中，
@@ -32,7 +33,7 @@ Chapter1_DenseMatrixAndArrary::Section3_ArrayAndCoefficientwiseOperations::Addit
 ## 当前进展
 1. 第一章翻译完成，代码测试通过，见Chapter1_DenseMatrixAndArrary文件夹；
 2. 第二章翻译完成，代码测试通过，见Chapter2_DenseLinearProblemsAndDecompositions文件夹；
-3. 第三章刚刚开始...
+3. 第三章和第四章翻译完成，但是这两章的代码较少，较多的是翻译的内容。
 
 
 ## 编译代码
@@ -49,14 +50,13 @@ Chapter1_DenseMatrixAndArrary::Section3_ArrayAndCoefficientwiseOperations::Addit
 ## 翻译记录
 - 2019年10月18-20日，初步完成第一、二章的内容；
 - 2019年10月21日，翻译了第三章部分内容；
+- 2019年10月22-24日，初步完成了整体内容。
 
 
 ## TODO
-- 测试当前翻译的内容可编译通过
-- 翻译：http://eigen.tuxfamily.org/dox/group__Sparse__chapter.html
-- 翻译：http://eigen.tuxfamily.org/dox/group__Geometry__chapter.html
 - 查缺补漏，提高翻译质量
-  
+- 把关键的内容整理，写一篇心得体会
+
 ## Contact
 由于本人精力和水平有限，希望和大家一起讨论，欢迎想一起翻译的小伙伴。
 qixianyu@buaa.edu.cn
