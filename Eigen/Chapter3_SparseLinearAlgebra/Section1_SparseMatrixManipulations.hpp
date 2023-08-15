@@ -129,19 +129,19 @@ void TheSparseMatrixClass()
         //这是通过在外部尺寸上进行标准循环，然后通过InnerIterator对当前内部向量的非零值进行迭代来实现的。
         //因此，必须以与存储顺序相同的顺序访问非零条目。这是一个例子：
 
-        {
-                SparseMatrix<double> mat(rows, cols);
-                for (int k = 0; k < mat.outerSize(); ++k)
-                {
-                        for (SparseMatrix<double>::InnerIterator it(mat, k); it; ++it)
-                        {
-                                it.value();
-                                it.row();   // row index
-                                it.col();   // col index (here it is equal to k)
-                                it.index(); // inner index, here it is equal to it.row()
-                        }
-                }
-        }
+        // {
+        //         SparseMatrix<double> mat(rows, cols);
+        //         for (int k = 0; k < mat.outerSize(); ++k)
+        //         {
+        //                 for (SparseMatrix<double>::InnerIterator it(mat, k); it; ++it)
+        //                 {
+        //                         it.value();
+        //                         it.row();   // row index
+        //                         it.col();   // col index (here it is equal to k)
+        //                         it.index(); // inner index, here it is equal to it.row()
+        //                 }
+        //         }
+        // }
         //对于可写表达式，可以使用valueRef（）函数修改参考值。如果稀疏矩阵或向量的类型取决于模板参数，则typename需要关键字来指示InnerIterator表示类型；
 }
 
